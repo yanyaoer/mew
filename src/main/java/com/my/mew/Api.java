@@ -1,7 +1,6 @@
 package com.my.mew;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -9,13 +8,11 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 
-import org.apache.http.impl.cookie.BasicClientCookie;
-
 /**
  * Created by yanyao on 11/25/14.
  */
 public class Api {
-//  public static final String DOMAIN = "http://172.20.1.161:8000/";
+  //  public static final String DOMAIN = "http://172.20.1.161:8000/";
   public static final String DOMAIN = "http://fallinlove.me/";
   public static final String BASE_URL = DOMAIN + "api/";
 

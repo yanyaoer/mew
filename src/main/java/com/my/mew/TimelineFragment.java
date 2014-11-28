@@ -43,12 +43,11 @@ public class TimelineFragment extends Fragment
     mContext = getActivity();
     View root = inflater.inflate(R.layout.timeline_layout, container, false);
     mAdd = (Button) root.findViewById(R.id.add);
-//    mAdd.setVisibility(View.VISIBLE);
     mAdd.setOnClickListener(this);
 
     mList = (PullToRefreshListView) root.findViewById(R.id.list);
-    mList.setMode(PullToRefreshBase.Mode.BOTH);
-    mList.setPullToRefreshOverScrollEnabled(false);
+//    mList.setMode(PullToRefreshBase.Mode.BOTH);
+//    mList.setPullToRefreshOverScrollEnabled(false);
     mList.setOnRefreshListener(this);
     load();
     return root;
