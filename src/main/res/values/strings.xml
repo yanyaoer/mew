@@ -8,7 +8,8 @@
     <string name="password">Password</string>
     <string name="signin">Sign in</string>
     <string name="signout">Sign out</string>
-    <string name="write">write</string>
-    <string name="submit">submit</string>
+    <string name="write">Write</string>
+    <string name="submit">Submit</string>
+    <string name="action_submit">Submit</string>
 
 </resources>

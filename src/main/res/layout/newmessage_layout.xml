@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="horizontal">
+
     <EditText
         android:id="@+id/data"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:ems="10"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:gravity="left|top"
-        android:inputType="textMultiLine" >
-        <requestFocus />
+        android:inputType="textMultiLine">
+
+        <requestFocus/>
     </EditText>
 
     <Button
         android:id="@+id/submit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/submit" />
+        android:text="@string/submit"
+        android:visibility="gone"/>
 
 </LinearLayout>

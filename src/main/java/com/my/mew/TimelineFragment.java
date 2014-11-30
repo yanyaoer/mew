@@ -46,7 +46,6 @@ public class TimelineFragment extends Fragment
     mAdd.setOnClickListener(this);
 
     mList = (PullToRefreshListView) root.findViewById(R.id.list);
-//    mList.setMode(PullToRefreshBase.Mode.BOTH);
 //    mList.setPullToRefreshOverScrollEnabled(false);
     mList.setOnRefreshListener(this);
     load();
@@ -100,9 +99,8 @@ public class TimelineFragment extends Fragment
   @Override
   public void onClick(View v) {
     FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-    transaction.replace(R.id.timeline_container, new NewMessageFragment());
+    transaction.replace(R.id.container, new NewMessageFragment());
     transaction.addToBackStack(null);
     transaction.commit();
-
   }
 }

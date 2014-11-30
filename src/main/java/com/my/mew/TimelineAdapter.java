@@ -81,7 +81,6 @@ public class TimelineAdapter extends BaseAdapter {
 
   public static List<String> findImg(String input) {
     List<String> result = new ArrayList<String>();
-//    String regex = "((http(s?):)|([/|.|\\w|\\s])*\\.(?:jpg|gif|png))";
     String regex = "(http(s?):/)(/[^/]+)+" + "\\.(?:jpg|gif|png)";
     Pattern pattern = Pattern.compile(regex);
 

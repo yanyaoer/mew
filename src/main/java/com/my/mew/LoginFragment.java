@@ -83,7 +83,7 @@ public class LoginFragment extends Fragment
             cookie.addCookie(c);
 
             FragmentTransaction transaction = fa.getSupportFragmentManager().beginTransaction();
-            transaction.replace(R.id.timeline_container, new TimelineFragment());
+            transaction.replace(R.id.container, new TimelineFragment());
             transaction.addToBackStack(null);
             transaction.commit();
           }

@@ -5,22 +5,22 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.view.KeyEvent;
+import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.loopj.android.http.PersistentCookieStore;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 
 import org.apache.http.Header;
-import org.apache.http.impl.cookie.BasicClientCookie;
 
 /**
  * Created by yanyao on 11/26/14.
@@ -30,6 +30,7 @@ public class NewMessageFragment extends Fragment
   private final String TAG = "NewMessage";
   private Context mContext;
   private EditText mData;
+  private InputMethodManager imm;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,13 +39,39 @@ public class NewMessageFragment extends Fragment
     View root = inflater.inflate(R.layout.newmessage_layout, container, false);
     mData = (EditText) root.findViewById(R.id.data);
 
-    Button btn = (Button) root.findViewById(R.id.submit);
-    btn.setOnClickListener(this);
+//    Button btn = (Button) root.findViewById(R.id.action_submit);
+//    btn.setOnClickListener(this);
+    imm = (InputMethodManager)
+            mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
+    imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+    ActionBar ab = ((MainActivity) getActivity()).getSupportActionBar();
+    ab.setDisplayHomeAsUpEnabled(true);
+    setHasOptionsMenu(true);
     return root;
   }
 
   @Override
+  public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+    inflater.inflate(R.menu.submit, menu);
+  }
+
+  @Override
+  public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+      case R.id.action_submit:
+        submit();
+//        Toast.makeText(mContext, "hello there", Toast.LENGTH_LONG).show();
+        return true;
+    }
+    return super.onOptionsItemSelected(item);
+  }
+
+  @Override
   public void onClick(View v) {
+    submit();
+  }
+
+  public void submit() {
     String data = mData.getText().toString();
     RequestParams params = new RequestParams();
     params.put("data", data);
@@ -62,12 +89,10 @@ public class NewMessageFragment extends Fragment
 
         FragmentActivity fa = getActivity();
         View view = fa.getCurrentFocus();
-        InputMethodManager imm = (InputMethodManager) fa.getSystemService(
-                Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
         FragmentTransaction transaction = fa.getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.timeline_container, new TimelineFragment());
+        transaction.replace(R.id.container, new TimelineFragment());
         transaction.addToBackStack(null);
         transaction.commit();
       }
@@ -75,10 +100,4 @@ public class NewMessageFragment extends Fragment
 
   }
 
-  public void onEditorAction(TextView v, int actionId, KeyEvent event) {
-    if (event != null) {
-      if (!event.isShiftPressed()) {
-      }
-    }
-  }
 }

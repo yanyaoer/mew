@@ -23,7 +23,7 @@ public class MainActivity extends ActionBarActivity {
     if (savedInstanceState == null) {
       Fragment fragment = cookie.getCookies().isEmpty() ? new LoginFragment() : new TimelineFragment();
       getSupportFragmentManager().beginTransaction()
-              .add(R.id.timeline_container, fragment)
+              .add(R.id.container, fragment)
               .commit();
     }
   }
@@ -36,17 +36,24 @@ public class MainActivity extends ActionBarActivity {
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    int id = item.getItemId();
-    if (id == R.id.action_settings) {
-      return true;
-    } else if (id == R.id.action_signout) {
-      cookie.clear();
-      FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-      transaction.replace(R.id.timeline_container, new LoginFragment());
-      transaction.addToBackStack(null);
-      transaction.commit();
-      return true;
+    switch (item.getItemId()) {
+      case R.id.action_submit:
+        // must be false then use fragment impl
+        // <http://stackoverflow.com/a/18319184>
+        return false;
+      case R.id.action_signout:
+        cookie.clear();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container, new LoginFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+        return true;
+      case android.R.id.home:
+        super.onBackPressed();
+        return true;
     }
+
     return super.onOptionsItemSelected(item);
   }
+
 }
